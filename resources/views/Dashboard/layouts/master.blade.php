@@ -29,13 +29,7 @@
             	@include('Dashboard.layouts.footer')
 				@include('Dashboard.layouts.footer-scripts')
 				
-				<script>
-				Pusher.logToConsole = true;
-
-var pusher = new Pusher('503d9e095f9574087895', {
-  cluster: 'mt1'
-});
-</script>
+	
 				
 	</body>
 </html>

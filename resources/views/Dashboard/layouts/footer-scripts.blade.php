@@ -1,7 +1,11 @@
 <!-- Back-to-top -->
 <a href="#top" id="back-to-top"><i class="las la-angle-double-up"></i></a>
 <!-- JQuery min js -->
+
+
 <script src="{{URL::asset('Dashboard/plugins/jquery/jquery.min.js')}}"></script>
+
+
 <!-- Bootstrap Bundle js -->
 <script src="{{URL::asset('Dashboard/plugins/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
 <!-- Ionicons js -->
@@ -28,11 +32,11 @@
 @yield('js')
 
 
-<script src="https://js.pusher.com/8.2.0/pusher.min.js"></script>
-
 @livewireScripts
 <!-- Sticky js -->
 <script src="{{URL::asset('Dashboard/js/sticky.js')}}"></script>
 <!-- custom js -->
 <script src="{{URL::asset('Dashboard/js/custom.js')}}"></script><!-- Left-menu js-->
 <script src="{{URL::asset('Dashboard/plugins/side-menu/sidemenu.js')}}"></script>
+
+

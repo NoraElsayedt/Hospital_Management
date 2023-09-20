@@ -19,7 +19,10 @@ use App\Http\Controllers\Ray_Employee\InviocController;
 use App\Http\Controllers\Doctor\LaboratorieEmployeeController;
 use App\Http\Controllers\Laboratorie_Employee\Invioc_labController;
 use App\Http\Controllers\dashboard_patient\PatientsController;
+use App\Http\Livewire\Chat\Createchat;
+use App\Http\Livewire\Chat\Main;
 
+use App\Events\MyEvent;
 
 Route::get('/Dashboard_Admin',[DashboardController::class,'index']);
 
@@ -44,6 +47,7 @@ Route::get('/dashboard/user', function () {
 
  // ##################### dashboard.admin ##############################
 Route::get('/dashboard/admin', function () {
+    // event(new MyEvent('Welcame ',auth()->user()->name));
     return view('Dashboard.Admin.dashboard');
 })->middleware(['auth:admin', 'verified'])->name('dashboard.admin');
 
@@ -148,6 +152,9 @@ Route::middleware('auth:doctor')->group(function () {
     Route::resource('Ray',RayController::class);
 
     Route::resource('Laboratory',LaboratoryController::class);
+
+    Route::get('List/patient', Createchat::class)->name('List.patient');
+    Route::get('Chat/patient', Main::class)->name('Chat.patient');
     
 
 });
@@ -176,6 +183,8 @@ Route::middleware('auth:patient')->group(function () {
     Route::get('patient_Labs',[PatientsController::class ,'getLab'])->name('patient_Labs');
     Route::resource('Ray_patient',RayController::class);
     Route::resource('Laboratory_patient',LaboratoryController::class);
+    Route::get('List/doctors', Createchat::class)->name('List.doctors');
+    Route::get('Chat/doctors', Main::class)->name('Chat.doctors');
 
 });
 

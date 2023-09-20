@@ -11,6 +11,9 @@ use App\Models\Fundaccount;
 use App\Models\Patientaccount;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
+use App\Events\MyEvent;
+use App\Events\CreateInvoice;
+use App\Models\Notification ;
 
 
 
@@ -31,9 +34,18 @@ class SingleInvoices extends Component
     public $subtotal;
     public $single_invoice_id ;
  public $updateMode =false ;
+ public $username;
+
 
     // ----------------------------- function click button(To Show table)
 public $show_table=true;
+
+
+// constrat as mount 
+public function mount(){
+    $this->username = auth()->user()->name;
+}
+
 
     public function show_table(){
         $this->show_table=false;
@@ -147,6 +159,22 @@ if($this->type == 1){
         $Fundaccount->save();
 
         $this->show_table=true;
+
+        $Notification = new Notification();
+        $Notification->user_id = $this->doctor_id;
+        $patient =Patient::find($this->patient_id); 
+        $Notification->message = "كشف جديد : ".$patient->name;
+        $Notification->save();
+
+
+        $data=[
+           'patient' => $this->patient_id,
+           'invoice_id' =>$Single_Invoice->id,
+           'doctor_id' => $this->doctor_id,
+
+        ];
+
+        event(new CreateInvoice($data));
         
     }
 }
